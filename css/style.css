@@ -1,0 +1,169 @@
+:root {
+    --bg-dark: #050505;
+    --card-bg: #121212;
+    --neon-blue: #3b82f6;
+    --neon-green: #10b981;
+    --neon-orange: #f59e0b;
+    --neon-purple: #8b5cf6;
+    --text-main: #ffffff;
+    --text-muted: #a3a3a3;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 120px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    font-size: 24px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00f2ff, #7000ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.welcome-text { padding: 0 25px; font-size: 22px; margin-bottom: 20px; }
+
+/* Glowing Card Grids */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 0 25px;
+}
+
+.card {
+    position: relative;
+    border-radius: 20px;
+    background: var(--card-bg);
+    overflow: hidden;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    width: 250%; height: 250%;
+    background: conic-gradient(transparent, transparent, var(--glow-color), transparent, transparent);
+    animation: spin 4s linear infinite;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: var(--card-bg);
+    border-radius: 18px;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.card.books { --glow-color: var(--neon-blue); }
+.card.quiz { --glow-color: var(--neon-green); }
+.card.progress { --glow-color: var(--neon-orange); }
+.card.plan { --glow-color: var(--neon-purple); }
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.card-content i {
+    font-size: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 14px;
+}
+
+.card.books i { color: var(--neon-blue); }
+.card.quiz i { color: var(--neon-green); }
+.card.progress i { color: var(--neon-orange); }
+.card.plan i { color: var(--neon-purple); }
+.card-content span { color: var(--text-main); font-weight: 500; }
+
+/* Layout List Items */
+.list-container { padding: 0 25px; display: flex; flex-direction: column; gap: 15px; }
+.list-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+}
+
+/* AI Fluid Container Box */
+.ai-container {
+    margin: 20px;
+    padding: 2px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-orange));
+    background-size: 200% 200%;
+    animation: waveBackground 6s ease infinite alternate;
+}
+
+@keyframes waveBackground {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.ai-content-inner { background: #0f0f0f; padding: 25px; border-radius: 18px; }
+.ai-buttons { display: flex; gap: 10px; margin-top: 25px; }
+.ai-buttons button {
+    flex: 1; padding: 14px; border-radius: 10px; border: none;
+    font-weight: bold; color: white; background: #222; cursor: pointer;
+}
+.btn-quiz { background: var(--neon-green) !important; color: black !important; }
+
+/* Universal Persistent Chat Elements */
+.chat-wrapper {
+    position: fixed;
+    bottom: 0; width: 100%;
+    padding: 15px 25px 25px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.95) 40%);
+    z-index: 100;
+}
+.chat-bar {
+    display: flex; align-items: center;
+    background: rgba(25, 25, 25, 0.85);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 30px; padding: 12px 18px; gap: 12px;
+}
+.chat-bar input { flex: 1; background: transparent; border: none; color: white; font-size: 16px; outline: none; }
+.chat-bar i { font-size: 24px; color: var(--text-muted); }
+.send-btn { color: var(--neon-blue) !important; cursor: pointer; }
+
+/* Backdrop Background blurs from image mockup */
+.top-glow { position: fixed; top: -50px; left: 0; right: 0; height: 100px; background: linear-gradient(90deg, rgba(16,185,129,0.3), rgba(245,158,11,0.3), rgba(59,130,246,0.3)); filter: blur(50px); z-index: -1; }
+.bottom-wave { position: fixed; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(90deg, rgba(236,72,153,0.2), rgba(245,158,11,0.2)); filter: blur(40px); z-index: -1; }
